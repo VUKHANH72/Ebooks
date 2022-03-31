@@ -1,0 +1,13 @@
+﻿.btn-submit__admin:hover {
+    color: #fff;
+    background: #3d60c7;
+    text-decoration: none;
+}
+
+.table-responsive {
+    overflow-x: unset;
+}
+
+.left-98 {
+    left: -98px !important;
+}

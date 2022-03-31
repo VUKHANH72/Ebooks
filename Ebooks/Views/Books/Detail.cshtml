@@ -1,0 +1,169 @@
+﻿@model Ebooks.Models.Book
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main__view-books">
+    <div class="container-fluid grid wide">
+        <div class="row sm-gutter background-white">
+            <div class="col p-5 wide-p-5 t-12 m-12 product__container">
+                <div class="product__image-main">
+                    <img src="@Html.DisplayFor(model => model.image_path)" class="product__image" alt="">
+                </div>
+            </div>
+            <div class="col p-7 wide-p-7 t-12 m-12 product__description">
+                <p class="product-title mg-0">Sách -  @Html.DisplayFor(model => model.title)</p>
+                <div class="product__sub-information d-flex">
+                    <div class="product1__vote-star">
+                        <div class="product1__vote-star-main">
+                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="14" color="#fdd836" style="color:#fdd836" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="14" color="#fdd836" style="color:#fdd836" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="14" color="#fdd836" style="color:#fdd836" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="14" color="#fdd836" style="color:#fdd836" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="14" color="#fdd836" style="color:#fdd836" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+                        </div>
+                    </div>
+                    <p class="product-sold">Đã bán @Html.DisplayFor(model => model.qty)  </p>
+                </div>
+                <div class="product-price__wrap">
+                    <p><span>₫</span>@Html.DisplayFor(model => model.price)</p>
+                </div>
+                <div class="product__ship-to-address">
+                    <div class="product__amount-title">Vận chuyển</div>
+                    <div class="d-flex product__ship-address">
+                        <div class="product__ship-icon">
+                            <svg enable-background="new 0 0 15 15" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon icon-free-shipping-line"><g><line fill="none" stroke-linejoin="round" stroke-miterlimit="10" x1="8.6" x2="4.2" y1="9.8" y2="9.8"></line><circle cx="3" cy="11.2" fill="none" r="2" stroke-miterlimit="10"></circle><circle cx="10" cy="11.2" fill="none" r="2" stroke-miterlimit="10"></circle><line fill="none" stroke-miterlimit="10" x1="10.5" x2="14.4" y1="7.3" y2="7.3"></line><polyline fill="none" points="1.5 9.8 .5 9.8 .5 1.8 10 1.8 10 9.1" stroke-linejoin="round" stroke-miterlimit="10"></polyline><polyline fill="none" points="9.9 3.8 14 3.8 14.5 10.2 11.9 10.2" stroke-linejoin="round" stroke-miterlimit="10"></polyline></g></svg>
+                        </div>
+                        Vận chuyển tới
+                    </div>
+                    <div class="address-customer">
+                        Chưa có địa chỉ vận chuyển
+                    </div>
+                </div>
+                @using (Html.BeginForm("Add2Cart", "Cart", new { @id = Model.id, @strURL = Request.Url.ToString() }))
+                {
+                    <div class="product__amount">
+                        <div class="product__amount-title">Số lượng</div>
+                        <div class="d-flex product__amount-main mg-r-17">
+                            <span id="plus-btn" onclick="changeQuantity('minus');" class="product__amount-main-minus btn-minus"><b><svg class="svg-inline--fa fa-minus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="minus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg></b></span>
+                            <input name="txtSoLg" id="txtQuantity" class="product__amount-main-input-content" value="1">
+                            <span onclick="changeQuantity('plus');" id="minus-btn" class="product__amount-main-plus btn-plus"><b><svg class="svg-inline--fa fa-plus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg></b></span>
+                        </div>
+                        <div class="product__amount-qty">@Html.DisplayFor(model => model.qty)  sản phẩm có sẵn</div>
+                    </div>
+                    <div class="d-flex jusctify-content-center product-btn">
+                        <div class="product-btn-cart">
+                            <div class="product-btn-cart-content">
+                                <button class="btn-t-2 btn-add-2-cart btn-block d-flex" type="submit" id="add_to_cart" onclick="location.href='@Url.Action("Add2Cart", "Cart", new { @id = Model.id, @strURL = Request.Url.ToString() })';">
+                                    <div class="product-btn-cart-main">
+                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             viewBox="0 0 511.976 511.976" style="enable-background:new 0 0 511.976 511.976;" xml:space="preserve">
+                                        <g>
+                                        <g>
+                                        <path d="M208,399.988c-26.464,0-48,21.536-48,48s21.536,48,48,48s48-21.536,48-48S234.464,399.988,208,399.988z M208,463.988
+                                                    c-8.832,0-16-7.168-16-16c0-8.832,7.168-16,16-16c8.832,0,16,7.168,16,16C224,456.82,216.832,463.988,208,463.988z" />
+                                            </g>
+                                        </g>
+                                        <g>
+                                        <g>
+                                        <path d="M400,399.988c-26.464,0-48,21.536-48,48s21.536,48,48,48s48-21.536,48-48S426.464,399.988,400,399.988z M400,463.988
+                                                    c-8.832,0-16-7.168-16-16c0-8.832,7.168-16,16-16c8.832,0,16,7.168,16,16C416,456.82,408.832,463.988,400,463.988z" />
+                                            </g>
+                                        </g>
+                                        <g>
+                                        <g>
+                                        <path d="M508.256,85.748c-3.008-3.648-7.52-5.76-12.256-5.76H119.936l-13.92-52.128c-1.856-7.008-8.192-11.872-15.456-11.872H16
+                                                    c-8.832,0-16,7.168-16,16c0,8.832,7.168,16,16,16h62.272l82.272,308.128c1.856,7.008,8.192,11.872,15.456,11.872h256
+                                                    c8.832,0,16-7.168,16-16c0-8.832-7.168-16-16-16H188.288l-9.376-35.136l285.792-12.864c7.456-0.352,13.696-5.792,15.008-13.12
+                                                    l32-176C512.576,94.196,511.296,89.396,508.256,85.748z M450.56,256.596l-280.128,12.608L128.48,111.988h348.352L450.56,256.596z" />
+                                            </g>
+                                        </g>
+                                        <g>
+                                        <g>
+                                        <path d="M336,175.988h-16v-16c0-8.832-7.168-16-16-16c-8.832,0-16,7.168-16,16v16h-16c-8.832,0-16,7.168-16,16
+                                                    c0,8.832,7.168,16,16,16h16v16c0,8.832,7.168,16,16,16c8.832,0,16-7.168,16-16v-16h16c8.832,0,16-7.168,16-16
+                                                    C352,183.156,344.832,175.988,336,175.988z" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    </div>
+
+                                    <span class="product-btn-add-product-text">Thêm vào giỏ hàng</span>
+                                </button>
+                            </div>
+                        </div>
+                        <a href="" class="product-btn-buy-now">
+                            <div class="product-btn-buy-content">
+                                <button class="btn-t-2 btn-add-2-cart btn-block d-flex" type="button" id="buy_now">
+                                    <span class="product-btn-buy-product-text">Mua ngay</span>
+                                </button>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row sm-gutter background-white mg-t-15 pad-10">
+            <div class="col p-12 wide-p-12 t-12 m-12">
+                <div class="product__details">
+                    <div class="product__details-title">
+                        <span>Chi tiết sản phẩm</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-12 wide-p-12 t-12 m-12">
+                <div class="product__details-content">
+                    <div class="grid">
+                        <div class="row sm-gutter" style="margin: 0 10px;">
+                            <div class="col l-1-4 m-0 c-0">
+                                <div class="product__details-content-list __details-content-list--left">
+                                    <span>Thể loại </span>
+                                    <span>Tác giả </span>
+                                    <span>Kho </span>
+                                </div>
+                            </div>
+                            <div class="col l-10 m-12 c-12">
+                                <div class="product__details-content-list __details-content-list--right">
+                                    <span>
+                                        @Html.DisplayFor(model => model.category.name)
+                                    </span>
+                                    <span> @Html.DisplayFor(model => model.author)</span>
+                                    <span>@Html.DisplayFor(model => model.qty)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-12 wide-p-12 t-12 m-12">
+                <div class="product__details">
+                    <div class="product__details-title">
+                        <span>Mô tả sản phẩm</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-12 wide-p-12 t-12 m-12">
+                <div class="product__details-content __details-content--description">@Html.DisplayFor(model => model.description)</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section script{
+    <script type="text/javascript">
+        function changeQuantity(type) {
+            var currentQty = $("#txtQuantity").val();
+            if (type == 'plus') {
+                $("#txtQuantity").val(parseInt(currentQty, 10) + 1);
+            }
+            else if (currentQty < 2) {
+                $("#txtQuantity").val('1');
+            }
+            else {
+                $("#txtQuantity").val(parseInt(currentQty, 10) - 1);
+            }
+        }
+    </script>
+}

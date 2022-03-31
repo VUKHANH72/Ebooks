@@ -1,0 +1,379 @@
+.header {
+    height: 70px;
+}
+
+.navbar__menu-left-cart p {
+    color: var(--black-color);
+    border: unset;
+}
+
+.navbar__menu-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar__menu-right-help {
+    font-size: 1.5rem;
+    line-height: 2.4rem;
+    color: var(--main-color-second);
+    text-decoration: none;
+}
+
+.container__form-login {
+    width: 100%;
+    display: flex;
+    background-color: var(--main-color-second);
+    padding: 50px 0 85px 0;
+}
+
+.container__form-login-left-img {
+    padding-top: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transform: translateX(-100px);
+}
+
+.container__form-login-right {
+    width: 450px;
+    height: 460px;
+    background-color: var(--white-color);    
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transform: translateX(-162px);
+    border-radius: 4px;
+}
+
+
+.form { 
+   padding: 30px;
+}
+
+.form .heading {
+    font-size: 2rem;
+    line-height: 3.2rem;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.form .description {
+    color: #636d77;
+    font-size: 1.4rem;
+    font-weight: 300;
+    line-height: 2rem;
+    margin: 4px 0 30px 0;
+}
+
+.form-group.invalid .form-control {
+    border-color: blue;
+}
+
+.form-control {
+    height: 40px;
+    font-size: 1.5rem;
+    line-height: 2.4rem;
+    color: rgba(0, 0, 0, 0.8);
+    padding: 8px 12px;
+    border: 1px solid #b3b3b3;
+    border-radius: 3px;
+    outline: none;
+    user-select: none;
+}
+
+.form-control:focus {
+    border: 1px solid rgba(0, 0, 0, 0.68);
+}
+
+.form-label,
+.form-message {
+    text-align: left;
+}
+
+  
+.form-group.invalid .form-message {
+    color: blue;
+}
+  
+.form-message {
+    font-size: 1.2rem;
+    line-height: 2.1rem;
+    margin-top: 5px;
+    padding-left: 5px;
+}
+
+.form-group-password {
+    position: relative;
+}
+
+.form-group-password-show {
+    position: absolute;
+    top: 27px;
+    right: 18px;
+    width: 25px;
+    height: 20px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    transform: translateY(50%);
+    z-index: 10;
+}
+
+
+.form-group-password-hide {
+    position: absolute;
+    top: 10px;
+    right: 18px;
+    width: 25px;
+    height: 20px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    transform: translateY(50%);
+    z-index: 10;
+}
+
+.form-group-password-show {
+    margin-top: -12px;
+}
+
+.form-group-password-hide {
+  display: none;
+}
+  
+
+.form-submit {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 600;
+    background-color: #1dbfaf;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.form__login-register-btn {
+    font-size: 1.5rem;
+    line-height: 2.6rem;
+    text-transform: uppercase;
+    width: 100%;
+    user-select: none;
+}
+
+.spacer {
+    margin-top: 36px;
+}
+
+.form__menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    user-select: none;
+}
+
+.form__menu a {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    color: #05a;
+    text-decoration: none;
+}
+
+.form__or {
+   width: 100%;
+   margin-top: 16px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.form__or-first,
+.form__or-second {
+   width: 45%;
+   height: 1px;
+   background-color: var(--border-color);
+}
+
+.form__or-content {
+   font-size: 1.5rem;
+   line-height: 2.2rem;
+   color: #ccc;
+   padding: 0 10px;
+   text-transform: uppercase;
+}
+
+
+.form__login-social {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+.form__login-social-facebook,
+.form__login-social-google,
+.form__login-social-apple {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 32%;
+    height: 40px;
+    padding-left: 5px;
+    border-radius: 2px;
+}
+
+
+.form__login-social-img-facebook {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+
+.form__login-social-facebook {
+   font-size: 1.4rem;
+   color: var(--white-color);
+   background-color: #1877f2;
+   text-decoration: none;
+}
+
+
+.form__login-social-google {
+    position: relative;
+}
+
+
+.g-signin2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+.form__login-social-apple {
+    background-color: var(--black-color);
+}
+
+.form__login-social-img-apple {
+   transform: translateX(4px);
+}
+
+
+.form__login-social-img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.form__login-social-content {
+    font-size: 2.1rem;
+    line-height: 2.3rem;
+    color: var(--white-color);
+    padding-left: 7px;
+}
+
+.form__login-social-content-google {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2.4rem;
+    line-height: 2.5rem;
+    user-select: none;
+    display: none;
+}
+
+.form__login-social-content-apple {
+    transform: translateX(4px);
+}
+
+.form__options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.form__options p {
+   font-size: 1.5rem;
+   line-height: 2.4rem;
+   color: rgba(0, 0, 0, 0.3);
+}
+
+.form__options a {
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+    color: var(--main-color-second);
+    padding-left: 6px;
+    text-decoration: none;
+}
+
+
+/* form register */
+
+.note__content {
+    color: var(--black-color);
+    font-size: 2rem;
+    line-height: 2.6rem;
+    margin-top: 40px;
+    text-align: center;
+}
+
+
+
+/* Login with google */
+.abcRioButtonContentWrapper {
+    background-color: #4285f4;
+}
+
+.abcRioButtonLightBlue {
+    height: 40px !important;
+    width: 107px !important;
+    border-radius: 2px;
+}
+
+.abcRioButtonIcon {
+    background-color: var(--white-color);
+    border-radius: 2px;
+    margin: 3px 0 0px 3px;
+}
+
+.abcRioButtonContents {
+    position: absolute !important;
+    top: 2px !important;
+    right: -5px !important;
+}
+
+.abcRioButtonContents span{
+    color: var(--white-color) !important;
+}
+
+/* PC có độ phân giải từ 1024px > 1239px */
+@media (min-width: 64em) and (max-width: 77.4375em) {
+    .container__form-login-left-img {
+        padding-top: 100%;
+    }
+
+    .container__form-login-right {
+        transform: translate(-100px,140px);
+    }
+
+    .form__login-social-google {
+        margin-left: 7px;
+    }
+
+    .footer {
+        text-align: center;
+    }
+
+    .footer__list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer__apps-download-app {
+        justify-content: center;
+    }
+
+}

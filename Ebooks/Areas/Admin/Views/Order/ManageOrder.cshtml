@@ -1,0 +1,235 @@
+﻿
+@{
+    ViewBag.Title = "Manage Order";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section FormActionCSS {
+    <link href="~/Content/formAction.css" rel="stylesheet" />
+
+}
+
+@section SideBar {
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">SB Admin</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="index.html">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Product
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item ">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+           aria-expanded="false" aria-controls="collapseTwo">
+            <i class="fas fa-book-open"></i>
+            <span>Quản lý sản phẩm</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item " href="@Url.Action("ListBook", "Book")">Quản lý sách</a>
+                <a class="collapse-item" href="@Url.Action("Index", "Category")">Quản lý thể loại</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Orders
+    </div>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item active">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+           aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-building-columns"></i>
+            <span>Quản lý bán hàng</span>
+        </a>
+        <div id="collapseUtilities" class="collapse show" aria-labelledby="headingUtilities"
+             data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item active" href="@Url.Action("Orders", "Order")">Quản lý đơn hàng</a>
+                <a class="collapse-item" href="utilities-border.html">Quản lý doanh thu</a>
+            </div>
+        </div>
+    </li>
+
+        @using Ebooks.Areas.Admin.Models
+    @{
+        user ct = (user)Session["username"];
+    }
+    @{
+        if (ct.type == 1 && ct != null)
+        {
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                ACCOUNT
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages"
+                   aria-expanded="false" aria-controls="collapsePages">
+                    <i class="fas fa-user-gear"></i>
+                    <span>Quản lý tài khoản</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="login.html">Khách hàng</a>
+                        <a class="collapse-item" href="@Url.Action("MangeUser", "User")">Nhân viên</a>
+                    </div>
+                </div>
+            </li>
+        }
+        else
+        {
+            <div></div>
+        }
+    }
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+}
+
+<div class="container" style="max-width: 720px; margin-bottom: 50px">
+    <div class="content">
+        <form>
+            @foreach (var item in ViewBag.CustomerInfo)
+            {
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Name</span>
+                        <input type="text" name="" value="@item.Customer_name" placeholder="" readonly disabled>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Contact</span>
+                        <input type="text" name="author" value="@item.Customer_phone" placeholder="" readonly disabled>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Address</span>
+                        <input type="text" name="author" value="@item.Customer_addr" placeholder="" readonly disabled>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Total Price</span>
+                        <input type="text" name="author" value="@item.Customer_total" placeholder="" readonly disabled>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Status</span>
+                        @{
+                            if (item.Customer_status == 1)
+                            {
+                                <input type="text" name="" value="Order Confirm" style="color: #2f56c8; border: 1px solid #2f56c8; border-bottom-width: 2px; " placeholder="" readonly >
+                            }
+                            else if (item.Customer_status == 0)
+                            {
+                                <input type="text" name="" style="color: #36b9cc; border: 1px solid #36b9cc; border-bottom-width: 2px;" value="Order Pending" placeholder="" readonly >
+                            }
+                        }
+                    </div>
+                </div>
+
+                <div class="button">
+                    @{
+                        if (item.Customer_status == 1)
+                        {
+                            <a type="button" href="@Url.Action("ChangeStatus", "Order", new { @id = item.Customer_orderID })" class="btn-submit__admin">Cancel</a>
+
+                        }
+                        else
+                        {
+                            <a type="button" href="@Url.Action("ChangeStatus", "Order", new { @id = item.Customer_orderID })" class="btn-submit__admin">Confirm</a>
+                        }
+                    }
+                </div>
+            }
+        </form>
+
+
+    </div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3" style="display:flex; justify-content:space-between;">
+        <h6 class="m-0 font-weight-bold text-primary">Số Lượng Sản Phẩm</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <colgroup>
+                    <col width="5%">
+                    <col width="15%">
+                    <col width="30%">
+                    <col width="15%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-center">STT</th>
+                        <th class="text-center">Ảnh</th>
+                        <th class="text-center">Tên sách</th>
+                        <th class="text-center">Tác giả</th>
+                        <th class="text-center">Đơn giá</th>
+                        <th class="text-center">Số lượng</th>
+                        <th class="text-center">Tổng tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 0;
+                    }
+                    @foreach (var item in ViewBag.BookOrder)
+                    {
+                        <tr>
+                            <td>@(++i)</td>
+                            <td>
+                                <div class="d-flex w-100 jus-cont-center">
+                                    <div class="img-field img-thumbnail rounded">
+                                        <img src="@item.Book_image" alt="Alternate Text" class="img-fluid rounded" />
+                                    </div>
+                                </div>
+                            </td>
+                            <td>@item.Book_name</td>
+                            <td>@item.Book_author</td>
+                            <td>@item.Book_price</td>
+                            <td>@item.Book_qty</td>
+                            <td>@item.Book_total</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

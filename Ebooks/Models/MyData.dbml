@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EBOOKS" Class="MyDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-A17IU7L\SQLEXPRESS;Initial Catalog=EBOOKS;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="EBOOKSConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Book" Member="Books">
+    <Type Name="Book">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="category_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="author" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="qty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="image_path" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="date_create" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Book_order_list" Member="order_lists" ThisKey="id" OtherKey="id_book" Type="order_list" />
+      <Association Name="category_Book" Member="category" ThisKey="category_id" OtherKey="id" Type="category" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.categories" Member="categories">
+    <Type Name="category">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="category_Book" Member="Books" ThisKey="id" OtherKey="category_id" Type="Book" />
+    </Type>
+  </Table>
+  <Table Name="dbo.customer" Member="customers">
+    <Type Name="customer">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="contact" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="date_create" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="customer_order" Member="orders" ThisKey="id" OtherKey="id_customer" Type="order" />
+    </Type>
+  </Table>
+  <Table Name="dbo.order_list" Member="order_lists">
+    <Type Name="order_list">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_order" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id_book" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="amount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="unit_price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Book_order_list" Member="Book" ThisKey="id_book" OtherKey="id" Type="Book" IsForeignKey="true" />
+      <Association Name="order_order_list" Member="order" ThisKey="id_order" OtherKey="id" Type="order" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.orders" Member="orders">
+    <Type Name="order">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="paid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_create" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="date_delivery" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="id_customer" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="order_order_list" Member="order_lists" ThisKey="id" OtherKey="id_order" Type="order_list" />
+      <Association Name="customer_order" Member="customer" ThisKey="id_customer" OtherKey="id" Type="customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.users" Member="users">
+    <Type Name="user">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="username" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="type" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

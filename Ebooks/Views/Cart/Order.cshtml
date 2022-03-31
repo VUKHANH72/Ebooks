@@ -1,0 +1,250 @@
+﻿@model IEnumerable<Ebooks.Models.Cart>
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/_CartAndOrder.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="cart__container-main">
+        <div class="line"></div>
+        <div class="cart__address">
+            <div class="cart__address-content">
+                <div class="cart__address-content-heading">
+                    <div class="address-content-icon">
+                        <svg height="16" viewBox="0 0 12 16" width="12" class="shopee-svg-icon icon-location-marker"><path d="M6 3.2c1.506 0 2.727 1.195 2.727 2.667 0 1.473-1.22 2.666-2.727 2.666S3.273 7.34 3.273 5.867C3.273 4.395 4.493 3.2 6 3.2zM0 6c0-3.315 2.686-6 6-6s6 2.685 6 6c0 2.498-1.964 5.742-6 9.933C1.613 11.743 0 8.498 0 6z" fill-rule="evenodd"></path></svg>
+                    </div>
+                    <div>Địa chỉ nhận hàng</div>
+                </div>
+            </div>
+            @using Ebooks.Models
+            @{
+                customer ct = (customer)Session["username"];
+            }
+            <div class="cart__address-information">
+                <div class="cart__address-information-user">
+                    <div class="information__user-name-phone">@(ct.name != null ? ct.name : "") (+84) @(ct.contact != null ? ct.contact : "")</div>
+                    <div class="information__user-address">
+                        @(ct.address != null ? ct.address : "")
+                    </div>
+                    <div class="information__user-default">MẶC ĐỊNH</div>
+                </div>
+                <div class="cart__address-information-changes">THAY ĐỔi</div>
+                <div></div>
+            </div>
+        </div>
+
+        <div class="cart__bill">
+            <div class="cart__bill-left">
+                <p>Sản phẩm</p>
+            </div>
+            <div class="cart__bill-right">
+                <p class="unit-cart">Đơn giá</p>
+                <p class="amount-cart">Số lượng</p>
+                <p class="amount_of_price">Thành tiền</p>
+            </div>
+
+        </div>
+
+        <div class="cart__list-product">
+            @foreach (var item in Model)
+            {
+                <div class="cart__product-favorite">
+                    <div class="cart__product-favorite-icon">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="62" height="16" fill="none"><path fill="#EE4D2D" fill-rule="evenodd" d="M0 2C0 .9.9 0 2 0h58a2 2 0 012 2v12a2 2 0 01-2 2H2a2 2 0 01-2-2V2z" clip-rule="evenodd"></path><g clip-path="url(#clip0)"><path fill="#fff" d="M8.7 13H7V8.7L5.6 6.3A828.9 828.9 0 004 4h2l2 3.3a1197.3 1197.3 0 002-3.3h1.6L8.7 8.7V13zm7.9-1.7h1.7c0 .3-.2.6-.5 1-.2.3-.5.5-1 .7l-.6.2h-.8c-.5 0-1 0-1.5-.2l-1-.8a4 4 0 01-.9-2.4c0-1 .3-1.9 1-2.6a3 3 0 012.4-1l.8.1a2.8 2.8 0 011.3.7l.4.6.3.8V10h-4.6l.2 1 .4.7.6.5.7.1c.4 0 .7 0 .9-.2l.2-.6v-.1zm0-2.3l-.1-1-.3-.3c0-.2-.1-.2-.2-.3l-.8-.2c-.3 0-.6.2-.9.5l-.3.5a4 4 0 00-.3.8h3zm-1.4-4.2l-.7.7h-1.4l1.5-2h1.1l1.5 2h-1.4l-.6-.7zm8.1 1.6H25V13h-1.7v-.5.1H23l-.7.5-.9.1-1-.1-.7-.4c-.3-.2-.4-.5-.6-.8l-.2-1.3V6.4h1.7v3.7c0 1 0 1.6.3 1.7.2.2.5.3.7.3h.4l.4-.2.3-.3.3-.5.2-1.4V6.4zM34.7 13a11.2 11.2 0 01-1.5.2 3.4 3.4 0 01-1.3-.2 2 2 0 01-.5-.3l-.3-.5-.2-.6V7.4h-1.2v-1h1.1V5h1.7v1.5h1.9v1h-2v3l.2 1.2.1.3.2.2h.3l.2.1c.2 0 .6 0 1.3-.3v1zm2.4 0h-1.7V3.5h1.7v3.4a3.7 3.7 0 01.2-.1 2.8 2.8 0 013.4 0l.4.4.2.7V13h-1.6V9.3 8.1l-.4-.6-.6-.2a1 1 0 00-.4.1 2 2 0 00-.4.2l-.3.3a3 3 0 00-.3.5l-.1.5-.1.9V13zm5.4-6.6H44V13h-1.6V6.4zm-.8-.9l1.8-2h1.8l-2.1 2h-1.5zm7.7 5.8H51v.5l-.4.5a2 2 0 01-.4.4l-.6.3-1.4.2c-.5 0-1 0-1.4-.2l-1-.7c-.3-.3-.5-.7-.6-1.2-.2-.4-.3-.9-.3-1.4 0-.5.1-1 .3-1.4a2.6 2.6 0 011.6-1.8c.4-.2.9-.3 1.4-.3.6 0 1 .1 1.5.3.4.1.7.4 1 .6l.2.5.1.5h-1.6c0-.3-.1-.5-.3-.6-.2-.2-.4-.3-.8-.3s-.8.2-1.2.6c-.3.4-.4 1-.4 2 0 .9.1 1.5.4 1.8.4.4.8.6 1.2.6h.5l.3-.2.2-.3v-.4zm4 1.7h-1.6V3.5h1.7v3.4a3.7 3.7 0 01.2-.1 2.8 2.8 0 013.4 0l.3.4.3.7V13h-1.6V9.3L56 8.1c-.1-.3-.2-.5-.4-.6l-.6-.2a1 1 0 00-.3.1 2 2 0 00-.4.2l-.3.3a3 3 0 00-.3.5l-.2.5V13z"></path></g><defs><clipPath id="clip0"><path fill="#fff" d="M0 0h55v16H0z" transform="translate(4)"></path></clipPath></defs></svg> -->
+                        <svg width="17" height="16" viewBox="0 0 17 16" class="_2zTpu5"><path d="M1.95 6.6c.156.804.7 1.867 1.357 1.867.654 0 1.43 0 1.43-.933h.932s0 .933 1.155.933c1.176 0 1.15-.933 1.15-.933h.984s-.027.933 1.148.933c1.157 0 1.15-.933 1.15-.933h.94s0 .933 1.43.933c1.368 0 1.356-1.867 1.356-1.867H1.95zm11.49-4.666H3.493L2.248 5.667h12.437L13.44 1.934zM2.853 14.066h11.22l-.01-4.782c-.148.02-.295.042-.465.042-.7 0-1.436-.324-1.866-.86-.376.53-.88.86-1.622.86-.667 0-1.255-.417-1.64-.86-.39.443-.976.86-1.643.86-.74 0-1.246-.33-1.623-.86-.43.536-1.195.86-1.895.86-.152 0-.297-.02-.436-.05l-.018 4.79zM14.996 12.2v.933L14.984 15H1.94l-.002-1.867V8.84C1.355 8.306 1.003 7.456 1 6.6L2.87 1h11.193l1.866 5.6c0 .943-.225 1.876-.934 2.39v3.21z" stroke-width=".3" stroke="#333" fill="#333" fill-rule="evenodd"></path></svg>
+                    </div>
+
+                    <div class="cart__product-favorite-content">
+                        <p>EBooks - Khám phá tiềm năng bản thân</p>
+                    </div>
+
+                    <div class="cart__product-favorite-feedback">
+                        <svg viewBox="0 0 16 16" class="shopee-svg-icon _2KYoW7 "><g fill-rule="evenodd"><path d="M15 4a1 1 0 01.993.883L16 5v9.932a.5.5 0 01-.82.385l-2.061-1.718-8.199.001a1 1 0 01-.98-.8l-.016-.117-.108-1.284 8.058.001a2 2 0 001.976-1.692l.018-.155L14.293 4H15zm-2.48-4a1 1 0 011 1l-.003.077-.646 8.4a1 1 0 01-.997.923l-8.994-.001-2.06 1.718a.5.5 0 01-.233.108l-.087.007a.5.5 0 01-.492-.41L0 11.732V1a1 1 0 011-1h11.52zM3.646 4.246a.5.5 0 000 .708c.305.304.694.526 1.146.682A4.936 4.936 0 006.4 5.9c.464 0 1.02-.062 1.608-.264.452-.156.841-.378 1.146-.682a.5.5 0 10-.708-.708c-.185.186-.445.335-.764.444a4.004 4.004 0 01-2.564 0c-.319-.11-.579-.258-.764-.444a.5.5 0 00-.708 0z"></path></g></svg>
+                    </div>
+                </div>
+
+                <div class="cart__product-main">
+                    <div class="cart__product-main-img">
+                        <img src="@Html.DisplayFor(modelItem => item.image)" alt="image product" class="cart__product-main-img-product">
+                        <div class="cart__product-main-img-content">
+                            <div>@Html.DisplayFor(modelItem => item.name)</div>
+                        </div>
+                    </div>
+
+                    <div class="cart__product-main-classify">
+                        <p>Phân Loại Hàng:</p>
+                        <p>@Html.DisplayFor(modelItem => item.category_name)</p>
+                    </div>
+
+                    <div class="cart__product-main-price">@String.Format("{0:0,0}", item.price)đ</div>
+
+                    <div class="product1__amount-cart-checkout">
+                        <div class="amount-product">@Html.DisplayFor(modelItem => item.qty)</div>
+                    </div>
+                    <div class="cart__product-main-price-main">@String.Format("{0:0,0}", @Html.DisplayFor(modelItem => item.total))đ</div>
+                </div>
+
+            }
+
+            <div class="checkout__message">
+                <div class="checkout__message-content flex-4">
+                    <div class="checkout__message-content-block">
+                        <span>Lời nhắn:</span>
+                        <div class="checkout__message-input-block background__message-input">
+                            <div class="checkout__message-input">
+                                <input type="text" class="message__user" placeholder="Lưu ý cho người bán ..." value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout__shipping-unit">
+                    <div class="checkout__shipping-unit-text">
+                        Đơn vị vận chuyển
+                        :
+                    </div>
+                    <div class="checkout__shipping-unit-name">
+                        <div class="checkout__shipping-unit-name-text">
+                            Standard Express
+                        </div>
+                    </div>
+                    <div class="checkout__shipping-unit-changes">THAY ĐỔI</div>
+                    <div class="checkout__shipping-unit-price">30.000đ</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="cart__product-pay">
+            <div class="cart__product-pay-total">
+                <div class="cart__product-pay-total-right-all">Tổng số tiền (@ViewBag.TotalBook sản phẩm):</div>
+                <div class="cart__product-pay-total-right-price">@String.Format("{0:0,0}", @ViewBag.TotalPrice)</div>
+            </div>
+        </div>
+
+        <div class="checkout__order-information">
+            <div class="checkout__choose-payment">
+                <div class="checkout__choose-payment-settings checkout__choose-payment-view">
+                    <div class="payment__settings-tittle">Phương thức thanh toán</div>
+                    <div class="payment__method-tabs">
+                        <span tabindex="0">
+                            <button class="method-variation">Thẻ Tín dụng/Ghi nợ</button>
+                        </span>
+                        <span tabindex="0">
+                            <button class="method-variation method-variation-selected">
+                                Thanh toán khi nhận hàng
+                                <div class="method-variation__tick">
+                                    <svg enable-background="new 0 0 12 12" viewBox="0 0 12 12" x="0" y="0" class="shopee-svg-icon icon-tick-bold"><g><path d="m5.2 10.9c-.2 0-.5-.1-.7-.2l-4.2-3.7c-.4-.4-.5-1-.1-1.4s1-.5 1.4-.1l3.4 3 5.1-7c .3-.4 1-.5 1.4-.2s.5 1 .2 1.4l-5.7 7.9c-.2.2-.4.4-.7.4 0-.1 0-.1-.1-.1z"></path></g></svg>
+                                </div>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="checkout__order">
+                <div class="checkout__order-total-product checkout__order-font checkout__order-grid-column">Tổng tiền hàng</div>
+                <div class="checkout__order-product-price checkout__order-font checkout__order-total-product">@String.Format("{0:0,0}", @ViewBag.TotalPrice)đ</div>
+                <div class="checkout__order-fee-shipping checkout__order-fee-shipping-rows checkout__order-font checkout__order-grid-column">Phí vận chuyển</div>
+                <div class="checkout__order-product-price checkout__order-fee-shipping-rows checkout__order-font">30.000đ</div>
+                <div class="checkout__order-total-all checkout__order-font checkout__order-grid-column">Tổng thanh toán: </div>
+                <div class="checkout__order-product-price checkout__order-total-all checkout__order-font checkout__order-total-all-price">@String.Format("{0:0,0}", @ViewBag.TotalPrice + 30000)đ</div>
+                <div class="checkout__order-submit">
+                    <div class="checkout__order-submit-term-of-service">
+                        <div class="checkout__order-TOS-content">
+                            Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo
+                            <a href="#">Điều khoản của shop</a>
+                        </div>
+                    </div>
+                    <button type="submit" value="ConfirmOrder" onclick="location.href='@Url.Action("Order", "Cart")'" class="checkout__order-stardust-button">Đặt hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="modal" style="display:none">
+    <div class="modal__overlay"></div>
+
+    <div class="modal__body">
+        <div class="auth-form">
+            <div class="auth-form__container">
+                <div class="auth-form__header">
+                    <h3 class="auth-form__heading">Địa chỉ</h3>
+                </div>
+                @using (Html.BeginForm("RegisterInfo", "Cart"))
+                {
+                    <div class="auth-form__form">
+
+                        <div class="auth-form__group name-n-phone">
+                            <input type="text" class="auth-form__input" name="Name" placeholder="Họ tên">
+                            <div class="divided"></div>
+                            <input type="text" class="auth-form__input" name="Contact" placeholder="Số điện thoại">
+                        </div>
+
+                        <div class="auth-form__group ">
+                            <textarea class="auth-form__input checkout-address-input" name="Address" placeholder="Địa chỉ cụ thể"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="auth-form__aside">
+                        <div class="auth-form__policy-text">
+                            <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 20C4.48618 20 0 15.5146 0 10.0008C0 4.48618 4.48618 0 10 0C15.5146 0 20 4.48618 20 10.0008C20 15.5146 15.5146 20 10 20ZM14.386 11.9968H5.55017C5.19262 11.9968 4.87812 11.8076 4.68973 11.4762C4.61899 11.3516 4.41753 10.9095 4.76201 10.3736C4.88351 10.1552 5.0496 9.87759 5.24106 9.57002C5.42484 9.27244 5.58554 8.98025 5.72933 8.67575C5.88005 8.36279 6.0123 8.02754 6.12457 7.6769C6.22145 7.36702 6.27143 7.03407 6.27143 6.68805C6.27143 6.20901 6.34218 5.76302 6.48212 5.36625C6.61361 4.98179 6.79662 4.63269 7.02422 4.32819C7.24337 4.03523 7.50481 3.77686 7.80392 3.56156C8.04844 3.38855 8.29835 3.25091 8.5521 3.14711C9.64498 2.6393 11.461 3.0556 11.4364 3.16172C11.6855 3.26475 11.91 3.38548 12.1169 3.5285C12.426 3.74149 12.7005 4.00908 12.9296 4.32281C13.1542 4.635 13.3341 4.98948 13.4633 5.37471C13.5963 5.76533 13.664 6.20362 13.664 6.67575C13.664 7.01024 13.7132 7.34088 13.8124 7.65999C13.9239 8.01908 14.0569 8.35895 14.2092 8.67114C14.3645 8.99486 14.5298 9.2909 14.7028 9.55464C14.8858 9.8353 15.0496 10.0752 15.1972 10.2759C15.3503 10.4789 15.4241 10.7142 15.411 10.9541C15.4002 11.1479 15.3403 11.3324 15.238 11.4862C15.1396 11.6385 15.0096 11.7646 14.8704 11.8407C14.7505 11.9114 14.579 11.9968 14.386 11.9968ZM7.28553 14.0607L6.22487 13L3.75 15.4749L4.81066 16.5355L7.28553 14.0607ZM12.7854 14.0607L13.8461 13L16.321 15.4749L15.2603 16.5355L12.7854 14.0607ZM9.28542 13.5607H10.7854V17.0607H9.28542V13.5607Z" fill="#F5BD49"></path></svg>
+                            <span>
+                                <strong href="" class="auth-form__text-link">Vui lòng ghi địa chỉ chính xác</strong> &
+                                <span href="" class="auth-form__text-link"> Vì vậy, chúng tôi có thể thuận tiện giao hàng cho bạn</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="auth-form__choose-type-address">
+                        <div class="auth-form__type-address">Loại địa chỉ: </div>
+                        <div class="auth-form__type-address-choose">
+                            <div>
+                                <div class="auth-form__type-address-btn  __type-address-btn--active">
+                                    <span>Nhà riêng</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="auth-form__type-address-btn">
+                                    <span>Văn phòng</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="auth-form__controls">
+                        <button class="btn btn--nomal auth-form__controls-back btn-w-140">TRỞ LẠI</button>
+                        <button type="submit" value="RegisterInfo" class="btn btn--primary btn-w-140">HOÀN THÀNH</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        const $ = document.querySelector.bind(document)
+        const $$ = document.querySelectorAll.bind(document)
+
+        function handleClickInformationChange() {
+            const btnShowForm = $('.cart__address-information-changes')
+            const btnHideForm = $('.auth-form__controls-back')
+            const formInfo = $('.modal')
+            //show password at login form input
+            btnShowForm.addEventListener('click', () => {
+                formInfo.style.display = 'flex'
+            })
+
+            btnHideForm.addEventListener('click', () => {
+                formInfo.style.display = 'none'
+            })
+        }
+        handleClickInformationChange()
+    </script>
+}
+

@@ -1,0 +1,207 @@
+﻿@model Ebooks.Areas.Admin.Models.Book
+
+@{
+    ViewBag.Title = "Create Book";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section FormActionCSS {
+    <link href="~/Content/formAction.css" rel="stylesheet" />
+
+}
+
+@section SideBar {
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">SB Admin</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="index.html">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Product
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item active">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo"
+           aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-book-open"></i>
+            @*<i class="fas fa-fw fa-cog"></i>*@
+            <span>Quản lý sản phẩm</span>
+        </a>
+        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item active" href="@Url.Action("ListBook", "Book")">Quản lý sách</a>
+                <a class="collapse-item" href="@Url.Action("Index", "Category")">Quản lý thể loại</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Orders
+    </div>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+           aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-building-columns"></i>
+            <span>Quản lý bán hàng</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+             data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="@Url.Action("Orders", "Order")">Quản lý đơn hàng</a>
+                <a class="collapse-item" href="utilities-border.html">Quản lý doanh thu</a>
+            </div>
+        </div>
+    </li>
+        @using Ebooks.Areas.Admin.Models
+    @{
+        user ct = (user)Session["username"];
+    }
+    @{
+        if (ct.type == 1 && ct != null)
+        {
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                ACCOUNT
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages"
+                   aria-expanded="false" aria-controls="collapsePages">
+                    <i class="fas fa-user-gear"></i>
+                    <span>Quản lý tài khoản</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="login.html">Khách hàng</a>
+                        <a class="collapse-item" href="@Url.Action("MangeUser", "User")">Nhân viên</a>
+                    </div>
+                </div>
+            </li>
+        }
+        else
+        {
+            <div></div>
+        }
+    }
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+}
+
+<div class="container">
+    <div class="content">
+        @using (Html.BeginForm())
+        {
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Title</span>
+                    <input type="text" name="title" placeholder="Enter book title" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Author</span>
+                    <input type="text" name="author" placeholder="Enter book author" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Category</span>
+                    @Html.DropDownList("category_id", (IEnumerable<SelectListItem>)ViewBag.CategoryList, new { @class = "category-list-input" })
+                </div>
+                <div class="input-box">
+                    <span class="details">Amount</span>
+                    <input type="text" name="qty" placeholder="Enter book amount" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Price</span>
+                    <input type="text" name="price" placeholder="Enter book price" style="margin-bottom: 20px;" required>
+
+                    @Html.LabelFor(model => model.image_path, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.image_path, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.image_path, "", new { @class = "text-danger" })
+                    <input type="file" name="fileUpload" id="fileUpload" accept="image/*"
+                           style="display:none;" />
+                    <input type="button" id="btnUpload" value="Chọn" class="btn btn-success" style="width: 100px; margin-top: 10px; }" />
+                </div>
+                <div class="input-box">
+                    <span class="details">Description</span>
+                    <textarea type="text" class="description-input" name="description" placeholder="Enter book description" required></textarea>
+                </div>
+                <div class="input-box">
+
+                </div>
+            </div>
+
+            <div class="button">
+                <input type="submit" value="Create">
+            </div>
+        }
+
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "ListBook")
+</div>
+@section upload
+{
+    <script>
+        $(function () {
+            $('#btnUpload').click(function () {
+                $('#fileUpload').trigger('click');
+            });
+        });
+        $('#fileUpload').change(function () {
+            if (window.FormData !== undefined) {
+                var fileUpload = $('#fileUpload').get(0);
+                var files = fileUpload.files;
+                var formData = new FormData();
+                formData.append('file', files[0]);
+                $.ajax(
+                    {
+                        type: 'POST',
+                        url: '/Book/ProcessUpload',
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (urlImage) {
+                            $('#pictureUpload').attr('src', urlImage);
+                            $('#image_path').val(urlImage);
+                        },
+                        error: function (err) {
+                            alert('Error ', err.statusText);
+                        }
+                    });
+            }
+        });
+    </script>
+}

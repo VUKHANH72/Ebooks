@@ -1,0 +1,64 @@
+﻿<div class="header__cart-wrap">
+    <i class="header__cart-icon fas fa-shopping-cart"></i>
+    @{
+        if (@ViewBag.TotalBook != 0)
+        {
+            <span class="header__cart-notice">@ViewBag.TotalBook</span>;
+        }
+        else
+        {
+            <div></div>
+        }
+    }
+    <!-- Has cart:  header__cart-list--no-cart -->
+    <div class="header__cart-list">
+        @{
+            var x = ViewBag.IsCart;
+            if (x > 0)
+            {
+                <h4 class="header__cart-heading">sản phẩm đã thêm</h4>
+                foreach (var item in ViewBag.lstItem)
+                {
+                    <ul class="header__cart-list-item">
+                        <li class="header__cart-item">
+                            <img src="@item.image" alt="" class="header__cart-img">
+                            <div class="header__cart-item-info">
+                                <div class="header__cart-item-head">
+                                    <h5 class="header__cart-item-name">@item.name</h5>
+                                    <div class="header__cart-item-price-wrap">
+                                        <span class="header__cart-item-price">₫@item.price</span>
+                                        <span class="header__cart-item-multiply">x</span>
+                                        <span class="header__cart-item-quantity">@item.qty</span>
+                                    </div>
+                                </div>
+
+                                <div class="header__cart-item-body">
+                                    <span class="header__cart-item-description">Thể loại: @item.category_name</span>
+                                    <a href='@Url.Action("DeleteCartInIcon", "Cart", new { @id = item.book_id, @strURL = HttpContext.Current.Request.RawUrl.ToString()})' class="header__cart-item-remove cart_item">Xóa</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+
+                }
+                <button class="header__cart-view btn btn--primary" onclick="location.href='@Url.Action("Cart", "Cart")';">Xem giỏ hàng</button>
+            }
+            if (x == 0)
+            {
+                <div>
+                    <div class="header__cart-list--menu" aria-labelledby="dropdownMenuButton" style="width: 400px">
+                        <div class="d-block text-center header__cart-no-cart" id="cart-no-product">
+                            <img src="~/Asset/client/assets/img/cart.png" class="header__cart-no-cart-img" alt="Giỏ hàng của bạn trống">
+                            <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+
+    </div>
+
+</div>
+
